@@ -169,7 +169,7 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
   <h2 class="reveal">Topluluk Ne Diyor?</h2>
   <div class="testimonials">
     <div class="testimonial reveal"><h3>Dia Saba</h3><p>“StartNest sayesinde harika bir ekiple startup kurduk.”</p></div>
-    <div class="testimonial reveal"><h3>Fernando Andrade</h3><p>“Fikrimi duyurmak hiç bu kadar kolay olmamıştı.”<p></div>
+    <div class="testimonial reveal"><h3>Fernando Andrade</h3><p>“Fikrimi duyurmak hiç bu kadar kolay olmamıştı.”p></div>
     <div class="testimonial reveal"><h3>Çekdar Orhan</h3><p>“Projelerime gönüllü ekipler bulabildim.”<p></div>
     <div class="testimonial reveal"><h3>Oktay Aydın</h3><p>"Harika ekip arkadaşları buldum sayenizde.”<p></div>
   </div>
@@ -235,6 +235,16 @@ menuLinks.forEach(link => {
   });
 });
 
+// Hamburger dışında tıklayınca menüyü kapat
+document.addEventListener("click", (e) => {
+  if(menu.classList.contains("active") && 
+     !menu.contains(e.target) && 
+     !hamburger.contains(e.target)) {
+    menu.classList.remove("active");
+    icon.className = "ri-menu-line";
+  }
+});
+
 // Subscribe form + scroll to form
 const form = document.getElementById("subscribe-form");
 const thanks = document.getElementById("thanks-msg");
@@ -248,5 +258,3 @@ form.addEventListener("submit", e => {
 
 </body>
 </html>
-
-
