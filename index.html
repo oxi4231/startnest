@@ -127,19 +127,37 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 @media(min-width:600px){ .features { grid-template-columns:repeat(2,1fr); } .testimonials{ grid-template-columns:repeat(2,1fr);} }
 @media(min-width:900px){ .features { grid-template-columns:repeat(4,1fr); } .testimonials{ grid-template-columns:repeat(3,1fr);} header h1 { font-size:3.5rem;} header p { font-size:1.1rem; } }
 
+/* Logo içindeki resim */
+/* nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Yazı ve logo arası boşluk */
+}
+
+/*nav .logo-img {
+  height: 50px; /* Logo yüksekliği, navbar ile uyumlu */
+/*  width: auto;  }
+
+  <img src="startnest.png" alt="StartNest Logo" class="logo-img">
+
+ /* Oranını koru */
+
+
 </style>
 </head>
 <body>
 
 <!-- Navbar -->
 <nav>
-  <div class="logo"><h2>StartNest</h2></div>
+<div class="logo">
+  <h2>StartNest</h2>  
+</div>
   <div class="hamburger" id="hamburger">
     <i class="ri-menu-line" id="hamburger-icon"></i>
   </div>
   <div class="menu" id="menu">
-    <a href="#features">Sizin içi</a>
-    <a href="#how">Nasıl açlışır?</a>
+    <a href="#features">Sizin için</a>
+    <a href="#how">Nasıl çalışır?</a>
     <a href="#faq">SSS</a>
     <a href="#subscribe">Kaydol</a>
   </div>
@@ -148,7 +166,12 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 <!-- Hero -->
 <header id="hero">
 
-  <h1 class="reveal"> Fikrini Anlat <br>  Ekibini Bul <br> Hayaline Ortak Ol</h1>
+  <h1 class="reveal">
+  Fikrini <span style="color:#06b6d4;">Anlat</span> <br>
+  Ekibini <span style="color:#06b6d4;">Bul</span> <br>
+  Hayaline <span style="color:#06b6d4;">Ortak Ol</span>
+</h1>
+
     <br>
   <p class="reveal">Yakında yayında! Erken erişim için e-mail adresini bırak.</p>
 
@@ -172,7 +195,7 @@ ya da
 </p></div>
 
 
-    <div class="feature reveal"><i class="ri-robot-2-line"></i><h3>AI Entegrasyonu ile En Doğru Eşleşme</h3><p>Yapay zeka destekli algoritma, ihtiyaçlarını anlayıp sana en uygun kişileri kartlarını önerir.</p></div>
+    <div class="feature reveal"><i class="ri-robot-2-line"></i><h3>AI Entegrasyonu ile En Doğru Eşleşme</h3><p>Yapay zeka destekli algoritma, ihtiyaçlarını anlayıp sana en uygun kartlarla seni eşleştirir.</p></div>
 
     <div class="feature reveal"><i class="ri-chat-1-line"></i><h3>Bütün Girişimciler ile Sohbet İmkanı
 </h3><p>Tüm aktif kullanıcıların birbirleri ile tanışabileceği, sohbet edebileceği, tartışabileceği "Sohbet" menüsünde networkünüzü geliştirin..</p></div>
@@ -199,16 +222,7 @@ ya da
   </div>
 </section>
 
-<!-- Testimonials -->
-<section>
-  <h2 class="reveal">Topluluk Ne Diyor?</h2>
-  <div class="testimonials">
-    <div class="testimonial reveal"><h3>Dia Saba</h3><p>“StartNest sayesinde harika bir ekiple startup kurduk.”</p></div>
-    <div class="testimonial reveal"><h3>Fernando Andrade</h3><p>“Fikrimi duyurmak hiç bu kadar kolay olmamıştı.”<p></div>
-    <div class="testimonial reveal"><h3>Çekdar Orhan</h3><p>“Projelerime gönüllü ekipler bulabildim.”<p></div>
-    <div class="testimonial reveal"><h3>Oktay Aydın</h3><p>"Harika ekip arkadaşları buldum sayenizde.”<p></div>
-  </div>
-</section>
+
 
 <!-- FAQ -->
 <section id="faq">
