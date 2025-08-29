@@ -6,22 +6,14 @@
 <title>StartNest - Yakında Geliyoruz</title>
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 <style>
-  
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-/* Yalnızca Raleway kullan */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap');
 
-/* Her yere zorla */
 html, body, * {
   font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
 }
 
-/* Form elemanları tarayıcı defaultunu ezsin */
-input, button, select, textarea {
-  font-family: inherit !important;
-}
+input, button, select, textarea { font-family: inherit !important; }
 
-/* Genel */
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 body { background:#000000; color:white; line-height:1.6; overflow-x:hidden; }
 a { text-decoration:none; color:inherit; }
@@ -52,17 +44,15 @@ nav .hamburger { display:none; cursor:pointer; color:white; font-size:1.8rem; }
 
 /* Hero */
 header {
-  min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
-  text-align:center; padding:0 1rem;
+  min-height:80vh; /* eskiden 100vh */
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:0 1rem 2rem 1rem; /* alt boşluğu düşürdük */
   background:#000000;
   position:relative; overflow:hidden;
   animation: bgmove 15s ease-in-out infinite alternate;
 }
-@keyframes bgmove {
-  0%{background-position:0 0;}
-  100%{background-position:100% 100%;}
-}
-header h1 { font-size:2.5 rem; margin-bottom:1rem; }
+@keyframes bgmove { 0%{background-position:0 0;} 100%{background-position:100% 100%;} }
+header h1 { font-size:2.5rem; margin-bottom:1rem; }
 header p { font-size:1rem; margin-bottom:2rem; color:#e0f2fe; max-width:90%; }
 
 .subscribe { display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem; }
@@ -77,6 +67,7 @@ header p { font-size:1rem; margin-bottom:2rem; color:#e0f2fe; max-width:90%; }
 
 /* Sections */
 section { padding:4rem 1rem; max-width:1000px; margin:auto; }
+section#features { padding-top:2rem; } /* eskiden 4rem */
 section h2 { text-align:center; font-size:2rem; margin-bottom:2.5rem; }
 .features { display:grid; grid-template-columns:1fr; gap:1.5rem; margin-top:2rem; }
 .feature {
@@ -127,83 +118,54 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 @media(min-width:600px){ .features { grid-template-columns:repeat(2,1fr); } .testimonials{ grid-template-columns:repeat(2,1fr);} }
 @media(min-width:900px){ .features { grid-template-columns:repeat(4,1fr); } .testimonials{ grid-template-columns:repeat(3,1fr);} header h1 { font-size:3.5rem;} header p { font-size:1.1rem; } }
 
-/* Logo içindeki resim */
-/* nav .logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* Yazı ve logo arası boşluk */
-}
-
-/*nav .logo-img {
-  height: 50px; /* Logo yüksekliği, navbar ile uyumlu */
-/*  width: auto;  }
-
-  <img src="startnest.png" alt="StartNest Logo" class="logo-img">
-
- /* Oranını koru */
-
-
 </style>
 </head>
 <body>
 
 <!-- Navbar -->
 <nav>
-<div class="logo">
-  <h2>StartNest</h2>  
+<div class="logo"><h2>StartNest</h2></div>
+<div class="hamburger" id="hamburger"><i class="ri-menu-line" id="hamburger-icon"></i></div>
+<div class="menu" id="menu">
+  <a href="#features">Sizin için</a>
+  <a href="#how">Nasıl çalışır?</a>
+  <a href="#faq">SSS</a>
+  <a href="#subscribe">Kaydol</a>
 </div>
-  <div class="hamburger" id="hamburger">
-    <i class="ri-menu-line" id="hamburger-icon"></i>
-  </div>
-  <div class="menu" id="menu">
-    <a href="#features">Sizin için</a>
-    <a href="#how">Nasıl çalışır?</a>
-    <a href="#faq">SSS</a>
-    <a href="#subscribe">Kaydol</a>
-  </div>
 </nav>
 
 <!-- Hero -->
 <header id="hero">
-
   <h1 class="reveal">
-  Fikrini <span style="color:#06b6d4;">Anlat</span> <br>
-  Ekibini <span style="color:#06b6d4;">Bul</span> <br>
-  Hayaline <span style="color:#06b6d4;">Ortak Ol</span>
-</h1>
-
-    <br>
+    Fikrini <span style="color:#06b6d4;">Anlat</span> <br>
+    Ekibini <span style="color:#06b6d4;">Bul</span> <br>
+    Hayaline <span style="color:#06b6d4;">Ortak Ol</span>
+  </h1>
+  <br>
   <p class="reveal">Yakında yayında! Erken erişim için e-mail adresini bırak.</p>
 
-  <form class="subscribe reveal" id="subscribe-form">
+  <form class="subscribe reveal" id="subscribe-form"
+        action="https://formspree.io/f/mbladvvz"
+        method="POST" target="_blank">
     <input type="email" name="email" placeholder="E-mail adresin" required>
     <button type="submit">Kaydol</button>
   </form>
-  <p id="thanks-msg" style="margin-top:1rem; display:none; color:#06b6d4; font-weight:600;">Teşekkürler! E-mail adresiniz kaydedildi.</p>
+  <p id="thanks-msg" style="margin-top:1rem; display:none; color:#06b6d4; font-weight:600;">
+    Teşekkürler! E-mail adresiniz kaydedildi.
+  </p>
 </header>
 
 <!-- Features -->
 <section id="features">
-
   <h2 class="reveal">Sizin için...</h2>
   <div class="features">
-    <div class="feature reveal"><i class="ri-profile-fill"></i><h3>Profil Oluştur ve Bekle Devrine Son</h3><p>İstediğin projeyi incele, başvur, bir ekipte yer al
-ya da
-İstediğin girişimciyi incele, davet et, ekibini tamamla.</p></div>
-
- <div class="feature reveal"><i class="ri-scales-line"></i><h3>Hukuki Destek</h3><p>Tüm kullanıcılarımıza ve girişimlerine özel olarak, sözleşmelerden, marka patent hukukuna kadar, kurucumuz Ufuktan ÖZBEK tarafından, sınırsız, 7/24 Hukuki Destek imkanı.
-</p></div>
-
-
+    <div class="feature reveal"><i class="ri-profile-fill"></i><h3>Profil Oluştur ve Bekle Devrine Son</h3><p>İstediğin projeyi incele, başvur, bir ekipte yer al ya da istediğin girişimciyi incele, davet et, ekibini tamamla.</p></div>
+    <div class="feature reveal"><i class="ri-scales-line"></i><h3>Hukuki Destek</h3><p>Tüm kullanıcılarımıza ve girişimlerine özel olarak, sözleşmelerden, marka patent hukukuna kadar sınırsız, 7/24 Hukuki Destek imkanı.</p></div>
     <div class="feature reveal"><i class="ri-robot-2-line"></i><h3>AI Entegrasyonu ile En Doğru Eşleşme</h3><p>Yapay zeka destekli algoritma, ihtiyaçlarını anlayıp sana en uygun kartlarla seni eşleştirir.</p></div>
-
-    <div class="feature reveal"><i class="ri-chat-1-line"></i><h3>Bütün Girişimciler ile Sohbet İmkanı
-</h3><p>Tüm aktif kullanıcıların birbirleri ile tanışabileceği, sohbet edebileceği, tartışabileceği "Sohbet" menüsünde networkünüzü geliştirin...</p></div>
-
+    <div class="feature reveal"><i class="ri-chat-1-line"></i><h3>Bütün Girişimciler ile Sohbet İmkanı</h3><p>Tüm aktif kullanıcıların birbirleri ile tanışabileceği, sohbet edebileceği, tartışabileceği "Sohbet" menüsünde networkünüzü geliştirin...</p></div>
   </div>
 </section>
 
-<!-- How it works -->
 <!-- How it works -->
 <section id="how">
   <h2 class="reveal">Ekip arkadaşı mı arıyorsun?</h2>
@@ -213,6 +175,7 @@ ya da
     <div class="step reveal"><span>3</span><p>Ekibini kur ve üretmeye başla.</p></div>
   </div>
 </section>
+
 <section id="how">
   <h2 class="reveal">Ekip mi arıyorsunuz?</h2>
   <div class="steps">
@@ -222,17 +185,13 @@ ya da
   </div>
 </section>
 
-
-
 <!-- FAQ -->
 <section id="faq">
   <h2 class="reveal">Sık Sorulan Sorular</h2>
   <div class="faq">
     <details class="reveal"><summary>StartNest'i kimler kullanabilir?</summary><p>Fikri olan girişimciler, teknik ekip arkadaşı arayanlar, startup kurmak isteyen öğrenciler ve yeni ekip arayan bireyler StartNest'e katılabilir. Hangi aşamada olduğun fark etmez, fikirden MVP'ye kadar herkes için yerimiz var.</p></details>
-    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir. Gelecekteki premium özellikler, ayrı olarak duyurulacaktır.
-</p></details>
-    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?
-</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.</p></details>
+    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir.</p></details>
+    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.</p></details>
   </div>
 </section>
 
@@ -295,17 +254,29 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Subscribe form + scroll to form
+// Subscribe form + Formspree
 const form = document.getElementById("subscribe-form");
 const thanks = document.getElementById("thanks-msg");
-form.addEventListener("submit", e => {
+
+form.addEventListener('submit', e => {
   e.preventDefault();
-  thanks.style.display = "block";
-  form.reset();
-  document.getElementById("subscribe-form").scrollIntoView({ behavior: "smooth" });
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if(response.ok){
+      thanks.style.display = 'block';
+      form.reset();
+      form.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      alert('Bir hata oluştu, tekrar deneyin.');
+    }
+  }).catch(error => console.error('Hata:', error));
 });
 </script>
 
 </body>
 </html>
-
