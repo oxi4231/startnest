@@ -78,15 +78,48 @@ section h2 { text-align:center; font-size:2rem; margin-bottom:2.5rem; }
 .feature i { font-size:2rem; margin-bottom:0.8rem; color:#06b6d4; cursor:default; }
 
 /* How it works */
-.steps { display:flex; flex-direction:column; gap:1.5rem; margin-top:2rem; }
+.steps {
+  display: flex;
+  flex-direction: column; /* Mobilde dikey */
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.steps-left, .steps-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 .step {
-  display:flex; align-items:flex-start; gap:0.8rem; background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px); padding:1rem 1.2rem; border-radius:16px; transition:transform 0.3s;
+  display:flex; 
+  align-items:flex-start; 
+  gap:0.8rem; 
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px); 
+  padding:1rem 1.2rem; 
+  border-radius:16px; 
+  transition:transform 0.3s;
 }
 .step:hover { transform:translateY(-6px) scale(1.01); }
 .step span {
-  font-size:1.3rem; background:#06b6d4; color:white;
-  border-radius:50%; width:35px; height:35px; display:flex; justify-content:center; align-items:center;
+  font-size:1.3rem; 
+  background:#06b6d4; 
+  color:white;
+  border-radius:50%; 
+  width:35px; 
+  height:35px; 
+  display:flex; 
+  justify-content:center; 
+  align-items:center;
+}
+
+@media(min-width:768px){
+  .steps {
+    flex-direction: row; /* Masaüstünde yan yana */
+    gap: 2rem;
+  }
+  .steps-left, .steps-right {
+    flex: 1; /* Eşit genişlik */
+  }
 }
 
 /* Testimonials */
@@ -160,21 +193,30 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 <section id="features">
   <h2 class="reveal">Sizin için...</h2>
   <div class="features">
-    <div class="feature reveal"><i class="ri-profile-fill"></i><h3>Profil Oluştur ve Bekle Devrine Son</h3><p>İstediğin projeyi incele, başvur, bir ekipte yer al ya da istediğin girişimciyi incele, davet et, ekibini tamamla.</p></div>
-    <div class="feature reveal"><i class="ri-scales-line"></i><h3>Hukuki Destek</h3><p>Tüm kullanıcılarımıza ve girişimlerine özel olarak sözleşmelerden marka patent hukukuna kadar sınırsız, 7/24 Hukuki Destek imkanı.</p></div>
-    <div class="feature reveal"><i class="ri-robot-2-line"></i><h3>AI Entegrasyonu ile En Doğru Eşleşme</h3><p>Yapay zeka destekli algoritma, ihtiyaçlarını anlayıp sana en uygun kartlarla seni eşleştirir.</p></div>
-    <div class="feature reveal"><i class="ri-chat-1-line"></i><h3>Bütün Girişimciler ile Sohbet İmkanı</h3><p>Tüm aktif kullanıcıların birbirleri ile tanışabileceği, sohbet edebileceği, tartışabileceği "Sohbet" menüsünde networkünüzü geliştirin...</p></div>
+    <div class="feature reveal"><i class="ri-profile-fill"></i><h3>Profil Oluştur ve Bekle Devrine Son</h3><p>İstediğin projeyi incele, başvur, bir ekipte yer al.</p></div>
+    <div class="feature reveal"><i class="ri-scales-line"></i><h3>Hukuki Destek</h3><p>Tüm kullanıcılarımıza ve girişimlerine özel olarak, sözleşmelerden, marka patent hukukuna kadar, kurucumuz Ufuktan ÖZBEK tarafından, sınırsız, 7/24 Hukuki Destek imkanı.
+</p></div>
+    <div class="feature reveal"><i class="ri-robot-2-line"></i><h3>AI Entegrasyonu ile En Doğru Eşleşme</h3><p>Yapay zeka destekli algoritma, ihtiyaçlarını anlayıp sana en uygun kişileri kartlarını önerir.
+</p></div>
+    <div class="feature reveal"><i class="ri-chat-1-line"></i><h3>Bütün Girişimciler ile Sohbet İmkanı</h3><p>Tüm aktif kullanıcıların birbirleri ile tanışabileceği, sohbet edebileceği, tartışabileceği "Sohbet" menüsünde networkünüzü geliştirin.
+</p></div>
   </div>
 </section>
 
 <!-- How it works -->
 <section id="how">
-  <h2 class="reveal">Ekip Arkadaşı mı/Ekip mi Arıyorsunuz?</h2>
+  <h2 class="reveal">Ekip Arkadaşı mı / Ekip mi Arıyorsunuz?</h2>
   <div class="steps">
-    <div class="step reveal"><span>1</span><p>Proje oluştur ve fikrini tanıt.</p></div>
-    <div class="step reveal"><span>2</span><p>İhtiyacın olan rolleri ekle.</p></div>
-    <div class="step reveal"><span>3</span><p>Ekibini kur ve üretmeye başla.</p></div>
-    <div class="step reveal"><span>4</span><p>Girişimci profilini oluştur, sana uygun projelere ulaş ve ekibe dahil ol.</p></div>
+    <div class="steps-left">
+      <div class="step reveal"><span>1</span><p>Proje oluştur ve fikrini tanıt.</p></div>
+      <div class="step reveal"><span>2</span><p>İhtiyacın olan rolleri ekle.</p></div>
+      <div class="step reveal"><span>3</span><p>Ekibini kur ve üretmeye başla.</p></div>
+    </div>
+    <div class="steps-right">
+      <div class="step reveal"><span>4</span><p>Girişimci profilini oluştur, sana uygun projelere ulaş ve ekibe dahil ol.</p></div>
+      <div class="step reveal"><span>5</span><p>İlgini çeken projeleri incele ve başvur.</p></div>
+      <div class="step reveal"><span>6</span><p>Ekibe katıl ve katkı sağlamaya başla.</p></div>
+    </div>
   </div>
 </section>
 
@@ -182,9 +224,12 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 <section id="faq">
   <h2 class="reveal">Sık Sorulan Sorular</h2>
   <div class="faq">
-    <details class="reveal"><summary>StartNest'i kimler kullanabilir?</summary><p>Fikri olan girişimciler, teknik ekip arkadaşı arayanlar, startup kurmak isteyen öğrenciler ve yeni ekip arayan bireyler StartNest'e katılabilir. Hangi aşamada olduğun fark etmez, fikirden MVP'ye kadar herkes için yerimiz var.</p></details>
-    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir.</p></details>
-    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.</p></details>
+    <details class="reveal"><summary>StartNest'i kimler kullanabilir?</summary><p>Fikri olan girişimciler, teknik ekip arkadaşı arayanlar, startup kurmak isteyen öğrenciler ve yeni ekip arayan bireyler StartNest'e katılabilir. Hangi aşamada olduğun fark etmez, fikirden MVP'ye kadar herkes için yerimiz var 🙂
+</p></details>
+    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir. Gelecekteki premium özellikler, ayrı olarak duyurulacaktır.
+</p></details>
+    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.
+</p></details>
   </div>
 </section>
 
@@ -234,7 +279,6 @@ menuLinks.forEach(link => {
     const targetId = link.getAttribute("href").substring(1);
 
     if(targetId === "subscribe"){
-      // Kaydol linki tıklanınca sayfanın en üstüne git
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -285,6 +329,3 @@ form.addEventListener('submit', e => {
 
 </body>
 </html>
-
-
-
