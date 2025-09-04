@@ -80,14 +80,18 @@ section h2 { text-align:center; font-size:2rem; margin-bottom:2.5rem; }
 /* How it works */
 .steps {
   display: flex;
-  flex-direction: column; /* Mobilde dikey */
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 2rem;
   margin-top: 2rem;
 }
 .steps-left, .steps-right {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+.steps-left h2, .steps-right h2 {
+  text-align:center;
+  margin-bottom:1rem;
 }
 .step {
   display:flex; 
@@ -114,11 +118,11 @@ section h2 { text-align:center; font-size:2rem; margin-bottom:2.5rem; }
 
 @media(min-width:768px){
   .steps {
-    flex-direction: row; /* Masaüstünde yan yana */
+    flex-direction: row;
     gap: 2rem;
   }
   .steps-left, .steps-right {
-    flex: 1; /* Eşit genişlik */
+    flex: 1;
   }
 }
 
@@ -205,17 +209,19 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 
 <!-- How it works -->
 <section id="how">
-  <h2 class="reveal">Ekip Arkadaşı mı / Ekip mi Arıyorsunuz?</h2>
   <div class="steps">
     <div class="steps-left">
+      <h2 class="reveal">Ekip Arkadaşı mı arıyorsunuz?</h2>
       <div class="step reveal"><span>1</span><p>Proje oluştur ve fikrini tanıt.</p></div>
       <div class="step reveal"><span>2</span><p>İhtiyacın olan rolleri ekle.</p></div>
       <div class="step reveal"><span>3</span><p>Ekibini kur ve üretmeye başla.</p></div>
     </div>
+
     <div class="steps-right">
-      <div class="step reveal"><span>4</span><p>Girişimci profilini oluştur, sana uygun projelere ulaş ve ekibe dahil ol.</p></div>
-      <div class="step reveal"><span>5</span><p>İlgini çeken projeleri incele ve başvur.</p></div>
-      <div class="step reveal"><span>6</span><p>Ekibe katıl ve katkı sağlamaya başla.</p></div>
+      <h2 class="reveal">Ekip mi arıyorsunuz?</h2>
+      <div class="step reveal"><span>1</span><p>Girişimci kartını oluştur ve kendini tanıt.</p></div>
+      <div class="step reveal"><span>2</span><p>Yapay zeka ile kendine uygun projeleri keşfet.</p></div>
+      <div class="step reveal"><span>3</span><p>Ekibe ve bir hayale dahil ol.</p></div>
     </div>
   </div>
 </section>
@@ -224,12 +230,9 @@ footer a { color:#06b6d4; margin:0 0.5rem; }
 <section id="faq">
   <h2 class="reveal">Sık Sorulan Sorular</h2>
   <div class="faq">
-    <details class="reveal"><summary>StartNest'i kimler kullanabilir?</summary><p>Fikri olan girişimciler, teknik ekip arkadaşı arayanlar, startup kurmak isteyen öğrenciler ve yeni ekip arayan bireyler StartNest'e katılabilir. Hangi aşamada olduğun fark etmez, fikirden MVP'ye kadar herkes için yerimiz var 🙂
-</p></details>
-    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir. Gelecekteki premium özellikler, ayrı olarak duyurulacaktır.
-</p></details>
-    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.
-</p></details>
+    <details class="reveal"><summary>StartNest'i kimler kullanabilir?</summary><p>Fikri olan girişimciler, teknik ekip arkadaşı arayanlar, startup kurmak isteyen öğrenciler ve yeni ekip arayan bireyler StartNest'e katılabilir. Hangi aşamada olduğun fark etmez, fikirden MVP'ye kadar herkes için yerimiz var 🙂</p></details>
+    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir. Gelecekteki premium özellikler, ayrı olarak duyurulacaktır.</p></details>
+    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.</p></details>
   </div>
 </section>
 
@@ -324,7 +327,6 @@ form.addEventListener('submit', e => {
     }
   }).catch(error => console.error('Hata:', error));
 });
-
 </script>
 
 </body>
