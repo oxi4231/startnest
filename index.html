@@ -1,663 +1,249 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="StartNest - Yakında Geliyoruz">
-  <meta property="og:description" content="Yeni nesil startup projeleri için platform. Çok yakında yayında!">
-  <meta property="og:image" content="https://startnest.net/logo.png">
-  <meta property="og:url" content="https://startnest.net">
-  <meta property="og:type" content="website">
-<title>StartNest - Yakında Geliyoruz</title>
-<link rel="icon" type="image/png" href="logo.png">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap');
-
-/* Düzeltilmiş Kırmızı Renk Paleti (Daha Derin Ton) */
-:root {
-  --primary-color: #dd4444; /* Derin Kırmızı - red-600'e yakın */
-  --primary-hover-color: #b73e3e; /* Koyu Kırmızı */
-  --text-highlight-color: #f7a8a8; /* Açık Kırmızı */
-  --background-dark: #000000;
-  --card-bg: rgba(255,255,255,0.07); /* Kart arka planı biraz daha opak */
-  --card-border: rgba(255,255,255,0.1); /* Kart kenarlığı */
-}
-
-html, body, * {
-  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
-}
-/* Sayfanın tamamının yüksekliğini hesaplayabilmek için HTML ve Body'ye minimum yükseklik veriyoruz */
-html, body { min-height: 100vh; }
-
-input, button, select, textarea { font-family: inherit !important; }
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { background:var(--background-dark); color:white; line-height:1.6; overflow-x:hidden; position: relative; } /* Body relative pozisyonu alıyor */
-a { text-decoration:none; color:inherit; }
-
-/* Parçacık arka planı için canvas - TÜM SİTEYİ KAPLAMASI İÇİN DÜZELTİLDİ */
-#particles-js {
-  position: fixed; /* Sayfa kaydırılsa bile sabit kalır */
-  width: 100%;
-  height: 100%; /* Tüm viewport yüksekliğini kaplar */
-  top: 0;
-  left: 0;
-  z-index: -1; /* Tüm içeriğin arkasında kalmasını sağlar */
-  opacity: 0.6; 
-}
-
-/* Navbar */
-nav {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 2rem; position:fixed; width:100%; top:0; z-index:1000;
-  background:var(--background-dark); backdrop-filter:blur(10px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
-}
-nav .logo { display:flex; align-items:center; gap:0.5rem; font-weight:700; font-size:1.5rem; }
-nav .logo img { height:32px; width:auto; }
-nav .menu { display:flex; gap:1rem; }
-nav .menu a { transition:0.3s ease-in-out; position:relative; }
-nav .menu a:hover { color:var(--primary-color); transform:translateY(-2px); }
-nav .menu a::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: var(--primary-color);
-  transition: width 0.3s ease-in-out;
-}
-nav .menu a:hover::after {
-  width: 100%;
-}
-nav .hamburger { display:none; cursor:pointer; color:white; font-size:1.8rem; }
-
-/* Hamburger mobil menü */
-@media(max-width:768px){
-  nav .menu {
-    position:fixed; top:0; right:-100%; height:100vh; width:70%;
-    flex-direction:column; background:var(--background-dark); padding-top:5rem; gap:2rem;
-    transition:0.3s ease-in-out;
-  }
-  nav .menu.active { right:0; }
-  nav .hamburger { display:block; }
-  nav .menu a { font-size:1.2rem; text-align:center; }
-}
-
-/* Hero */
-header {
-  min-height:80vh;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  text-align:center; padding:0 1rem 2rem 1rem;
-  background:transparent; /* Arka plan rengini şeffaf yapıyoruz ki parçacıklar görünsün */
-  position:relative; overflow:hidden;
-  padding-top: calc(80px + 2rem); 
-}
-header h1, header p, .subscribe, #countdown { z-index: 2; position: relative; } 
-
-header h1 {
-  font-size:2.8rem; margin-bottom:1rem;
-  text-shadow: 0 0 10px var(--primary-color), 0 0 20px rgba(221, 68, 68, 0.4); 
-  animation: text-glow 2s ease-in-out infinite alternate;
-}
-@keyframes text-glow {
-  0% { text-shadow: 0 0 5px var(--primary-color); }
-  100% { text-shadow: 0 0 15px var(--primary-color), 0 0 25px rgba(221, 68, 68, 0.6); }
-}
-header p { font-size:1.1rem; margin-bottom:2rem; color:#e0f2fe; max-width:90%; }
-header h1 span { color:var(--primary-color); }
-
-.subscribe { display:flex; flex-wrap:wrap; justify-content:center; gap:0.5rem; }
-.subscribe input {
-  padding:0.8rem; border-radius:12px; border:1px solid var(--primary-color);
-  min-width:200px; font-size:0.95rem; background:rgba(255,255,255,0.1); color:white;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-.subscribe input:focus {
-  outline: none;
-  border-color: var(--primary-hover-color);
-  box-shadow: 0 0 8px var(--primary-color);
-}
-.subscribe button {
-  padding:0.8rem 1.2rem; border-radius:12px; border:none; background:var(--primary-color); color:white;
-  cursor:pointer; transition:0.3s ease-in-out; font-weight:600;
-  box-shadow: 0 5px 15px rgba(221, 68, 68, 0.4); 
-}
-.subscribe button:hover {
-  background:var(--primary-hover-color); transform:translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 20px rgba(221, 68, 68, 0.6);
-}
-#thanks-msg { color:var(--primary-color) !important; text-shadow: 0 0 5px var(--primary-color); }
-
-/* Deadline Sayaç Stili */
-#countdown {
-  margin-top: 2rem;
-  padding: 1.8rem 2.5rem; 
-  border-radius: 20px; 
-  background: rgba(221, 68, 68, 0.15); 
-  border: 2px solid var(--primary-color);
-  box-shadow: 0 0 25px rgba(221, 68, 68, 0.6); 
-  animation: pulse 2s infinite alternate; 
-  text-shadow: 0 0 8px var(--primary-color); 
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 15px rgba(221, 68, 68, 0.5); border-color: var(--primary-color); }
-  100% { box-shadow: 0 0 40px rgba(221, 68, 68, 0.9); border-color: var(--primary-hover-color); }
-}
-.countdown-unit {
-  display: inline-block;
-  margin: 0 0.7rem; 
-  padding: 0.7rem 1rem;
-  background: var(--primary-color);
-  border-radius: 10px;
-  color: white;
-  font-weight: 800; 
-  font-size: 1.5rem; 
-  line-height: 1.2;
-  position: relative;
-  overflow: hidden; 
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
-.countdown-unit:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(221, 68, 68, 0.7);
-}
-.countdown-unit span {
-  display: block;
-  font-size: 0.85rem; 
-  font-weight: 500;
-  opacity: 0.9;
-  margin-top: 0.3rem;
-}
-#countdown-label {
-  font-size: 1.5rem; 
-  font-weight: 700;
-  color: var(--text-highlight-color);
-  display: block;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(221, 68, 68, 0.7);
-}
-@media(max-width:480px){
-  .countdown-unit { margin: 0 0.4rem; padding: 0.5rem 0.8rem; font-size: 1.2rem; }
-  .countdown-unit span { font-size: 0.7rem; }
-  #countdown-label { font-size: 1.2rem; }
-  #countdown { padding: 1.2rem 1.5rem; }
-}
-
-
-/* Sections */
-section { 
-  padding:4rem 1rem; max-width:1000px; margin:auto; 
-  position: relative; /* İçeriğin parçacıkların üzerinde kalması için */
-  background: var(--background-dark); /* Bölüm arka planı (arka plan sabit olduğundan, sayfanın geri kalanını görünür yapmak için */
-  z-index: 10;
-}
-section#features { padding-top:2rem; }
-section h2 {
-  text-align:center; font-size:2.2rem; margin-bottom:2.5rem;
-  color: var(--text-highlight-color);
-  text-shadow: 0 0 8px var(--primary-color);
-}
-.features { display:grid; grid-template-columns:1fr; gap:1.8rem; margin-top:2rem; }
-.feature {
-  background:var(--card-bg); backdrop-filter:blur(12px); 
-  border-radius:18px; padding:1.8rem; transition:transform 0.4s ease, box-shadow 0.4s ease;
-  text-align:center;
-  border: 1px solid var(--card-border); 
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
-}
-.feature:hover {
-  transform:translateY(-10px) scale(1.03); 
-  box-shadow:0 15px 30px rgba(0,0,0,0.6), 0 0 25px rgba(221, 68, 68, 0.7); 
-  border-color: var(--primary-color);
-}
-.feature i {
-  font-size:2.5rem; margin-bottom:1rem; color:var(--primary-color); cursor:default;
-  text-shadow: 0 0 10px var(--primary-color); 
-}
-.feature h3 { color: var(--text-highlight-color); margin-bottom: 0.5rem; }
-
-/* How it works */
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem; 
-  margin-top: 2.5rem;
-}
-.steps-left, .steps-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
-}
-.steps-left h2, .steps-right h2 {
-  text-align:center;
-  margin-bottom:1.5rem;
-  color: var(--text-highlight-color);
-  text-shadow: 0 0 8px var(--primary-color);
-}
-.step {
-  display:flex; 
-  align-items:flex-start; 
-  gap:1rem; 
-  background:var(--card-bg);
-  backdrop-filter:blur(12px); 
-  padding:1.2rem 1.5rem; 
-  border-radius:18px; 
-  transition:transform 0.4s ease, box-shadow 0.4s ease;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-.step:hover {
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(221, 68, 68, 0.6);
-  border-color: var(--primary-color);
-}
-.step span {
-  font-size:1.4rem; 
-  background:var(--primary-color); 
-  color:white;
-  border-radius:50%; 
-  width:40px;  
-  height:40px; 
-  display:flex; 
-  justify-content:center; 
-  align-items:center;
-  font-weight: 700;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  transition: background 0.3s ease;
-}
-.step:hover span {
-  background: var(--primary-hover-color);
-}
-
-@media(min-width:768px){
-  .steps {
-    flex-direction: row;
-    gap: 2.5rem;
-  }
-  .steps-left, .steps-right {
-    flex: 1;
-  }
-}
-
-/* Testimonials */
-.testimonials { display:grid; grid-template-columns:1fr; gap:1.5rem; margin-top:2rem; }
-.testimonial {
-  background:var(--card-bg); backdrop-filter:blur(12px); padding:1.8rem; border-radius:18px;
-  transition:transform 0.4s ease, box-shadow 0.4s ease;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-.testimonial:hover {
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:0 12px 25px rgba(0,0,0,0.5), 0 0 20px rgba(221, 68, 68, 0.6);
-  border-color: var(--primary-color);
-}
-.testimonial h3 { margin-bottom:0.5rem; color:var(--primary-color); text-shadow: 0 0 5px var(--primary-color); }
-
-/* FAQ */
-.faq { max-width:100%; margin:auto; margin-top:2rem; }
-details {
-  background:var(--card-bg); padding:1rem 1.2rem; border-radius:18px;
-  margin-bottom:1rem; backdrop-filter:blur(12px); transition:transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
-details:hover {
-  transform:translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 15px rgba(221, 68, 68, 0.4);
-  border-color: var(--primary-color);
-}
-details summary {
-  cursor:pointer; font-weight:700; color:var(--text-highlight-color);
-  transition: color 0.3s ease;
-}
-details summary:hover {
-  color: var(--primary-color);
-}
-details p { margin-top:0.8rem; color:#cbd5e1; font-size:1rem; line-height:1.7; }
-
-/* Footer */
-footer { 
-  background:var(--background-dark); text-align:center; padding:2.5rem; font-size:0.9rem; border-top: 1px solid rgba(255,255,255,0.05); 
-  position: relative; z-index: 10; /* İçeriğin parçacıkların üzerinde kalması için */
-}
-footer a { color:var(--primary-color); margin:0 0.7rem; transition: color 0.3s ease, transform 0.3s ease; }
-footer a:hover { color:var(--primary-hover-color); transform:translateY(-2px); text-shadow: 0 0 5px var(--primary-color); }
-
-/* Scroll Animations */
-.reveal { opacity:0; transform:translateY(40px); transition:0.9s ease-out; } 
-.reveal.active { opacity:1; transform:translateY(0); }
-
-/* Responsive */
-@media(min-width:600px){ .features { grid-template-columns:repeat(2,1fr); } .testimonials{ grid-template-columns:repeat(2,1fr);} }
-@media(min-width:900px){ .features { grid-template-columns:repeat(4,1fr); } .testimonials{ grid-template-columns:repeat(3,1fr);} header h1 { font-size:4rem;} header p { font-size:1.2rem; } }
-@media(min-width:1200px){ header h1 { font-size:5rem;} }
-</style>
-</head>
-<body>
-
-<div id="particles-js"></div> 
-
-<nav>
-  <div class="logo">
-    <img src="logo_white.png" alt="StartNest Logo">
-    <h2>StartNest</h2>
-  </div>
-  <div class="hamburger" id="hamburger"><i class="ri-menu-line" id="hamburger-icon"></i></div>
-  <div class="menu" id="menu">
-    <a href="#features">Sizin için</a>
-    <a href="#how">Nasıl Çalışır?</a>
-    <a href="#faq">SSS</a>
-    <a href="#subscribe">Kaydol</a>
-  </div>
-</nav>
-
-<header id="hero">
-  <h1 class="reveal">
-    Fikrini <span>Anlat</span> <br>
-    Ekibini <span>Bul</span> <br>
-    Harekete <span>Geç</span>
-  </h1>
-  <br>
-  <p class="reveal">Yakında yayında! Erken erişim için e-mail adresini bırak ve geri sayımı takip et!</p>
-
-    <div id="countdown" class="reveal">
-    <span id="countdown-label">BÜYÜK AÇILIŞA SON:</span>
-    <div id="timer">
-      <div class="countdown-unit"><span id="days">00</span><span>Gün</span></div>
-      <div class="countdown-unit"><span id="hours">00</span><span>Saat</span></div>
-      <div class="countdown-unit"><span id="minutes">00</span><span>Dakika</span></div>
-      <div class="countdown-unit"><span id="seconds">00</span><span>Saniye</span></div>
-    </div>
-  </div>
-  <br>
-
-  <form class="subscribe reveal" id="subscribe-form"
-        action="https://formspree.io/f/mbladvvz"
-        method="POST" target="_blank">
-    <input type="email" name="email" placeholder="E-mail adresin" required>
-    <button type="submit">Hemen Kaydol</button>
-  </form>
-  <p id="thanks-msg" style="margin-top:1rem; display:none; font-weight:600;">
-    Teşekkürler! E-mail adresiniz kaydedildi.
-  </p>
-</header>
-
-<section id="features">
-  <h2 class="reveal">Sizin için...</h2>
-  <div class="features">
-    <div class="feature reveal"><i class="ri-profile-fill"></i><h3>Profil Oluştur ve Bekle Devrine Son</h3><p>İstediğin projeyi incele, başvur, bir ekipte yer al.</p></div>
-    <div class="feature reveal"><i class="ri-scales-line"></i><h3>Hukuki Destek</h3><p>Tüm kullanıcılarımıza ve girişimlerine özel olarak, sözleşmelerden, marka patent hukukuna kadar, kendi avukatlarımız tarafından, sınırsız, 7/24 Hukuki Destek imkanı.
-</p></div>
-    <div class="feature reveal"><i class="ri-robot-2-line"></i><h3>AI Entegrasyonu ile En Doğru Eşleşme</h3><p>Yapay zeka destekli algoritma, ihtiyaçlarını anlayıp sana en uygun kişilerin kartlarını önerir.
-</p></div>
-    <div class="feature reveal"><i class="ri-chat-1-line"></i><h3>Bütün Girişimciler ile Sohbet İmkanı</h3><p>Tüm aktif kullanıcıların birbirleri ile tanışabileceği, sohbet edebileceği, tartışabileceği "Sohbet" menüsünde networkünüzü geliştirin.
-</p></div>
-  </div>
-</section>
-
-<section id="how">
-  <div class="steps">
-    <div class="steps-left">
-      <h2 class="reveal">Ekip Arkadaşı mı arıyorsunuz?</h2>
-      <div class="step reveal"><span>1</span><p>Proje oluştur ve fikrini tanıt.</p></div>
-      <div class="step reveal"><span>2</span><p>İhtiyacın olan rolleri ekle.</p></div>
-      <div class="step reveal"><span>3</span><p>Ekibini kur ve üretmeye başla.</p></div>
-    </div>
-
-    <div class="steps-right">
-      <h2 class="reveal">Ekip mi arıyorsunuz?</h2>
-      <div class="step reveal"><span>1</span><p>Girişimci kartını oluştur ve kendini tanıt.</p></div>
-      <div class="step reveal"><span>2</span><p>Yapay zeka ile kendine uygun projeleri keşfet.</p></div>
-      <div class="step reveal"><span>3</span><p>Ekibe ve bir hayale dahil ol.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <h2 class="reveal">Sık Sorulan Sorular</h2>
-  <div class="faq">
-    <details class="reveal"><summary>StartNest'i kimler kullanabilir?</summary><p>Fikri olan girişimciler, teknik ekip arkadaşı arayanlar, startup kurmak isteyen öğrenciler ve yeni ekip arayan bireyler StartNest'e katılabilir. Hangi aşamada olduğun fark etmez, fikirden MVP'ye kadar herkes için yerimiz var 🙂</p></details>
-    <details class="reveal"><summary>StartNest ücretli mi?</summary><p>Hayır, şu anda StartNest tamamen ücretsizdir. İlk kullanıcılarımıza özel olarak hiçbir ücret veya komisyon talep edilmemektedir. Gelecekteki premium özellikler, ayrı olarak duyurulacaktır.</p></details>
-    <details class="reveal"><summary>Yatırımcılar veya mentorlar platformda var mı?</summary><p>Şu an öncelikli amacımız girişimcileri doğru ekiplerle buluşturmak. Ancak roadmap’imizde mentor ve yatırımcı eşleşmeleri de yer alıyor. Yakında bu destekleri de sisteme entegre edeceğiz.</p></details>
-  </div>
-</section>
-
-<footer>
-  <p>© 2025 StartNest • Tüm hakları saklıdır</p>
-  <p>
-    <a href="https://www.linkedin.com/company/startnestt/">LinkedIn</a> • 
-    <a href="https://www.instagram.com/start_nest/">Instagram</a>
-  </p>
-  <p style="margin-top:0.5rem; font-size:0.75rem; color:#94a3b8;">Design by Cio</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-// Reveal animasyonu
-const reveals = document.querySelectorAll(".reveal");
-function revealElements() {
-  for (let r of reveals) {
-    const rect = r.getBoundingClientRect();
-    if (rect.top < window.innerHeight || window.innerWidth < 768) {
-      r.classList.add("active");
-    }
-  }
-}
-window.addEventListener("scroll", revealElements);
-window.addEventListener("load", revealElements);
-
-
-// Hamburger Menü + X ikonu
-const hamburger = document.getElementById("hamburger");
-const menu = document.getElementById("menu");
-const icon = document.getElementById("hamburger-icon");
-
-hamburger.addEventListener("click", () => {
-  menu.classList.toggle("active");
-  icon.className = menu.classList.contains("active") ? "ri-close-line" : "ri-menu-line";
-});
-
-// Menü linklerine tıklayınca menüyü kapat ve smooth scroll + offset uygula
-const menuLinks = menu.querySelectorAll("a");
-menuLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    menu.classList.remove("active");
-    icon.className = "ri-menu-line";
-
-    const targetId = link.getAttribute("href").substring(1);
-
-    if(targetId === "subscribe"){
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
-    const targetSection = document.getElementById(targetId);
-    if(targetSection){
-      const navbarHeight = document.querySelector("nav").offsetHeight;
-      const topPos = targetSection.getBoundingClientRect().top + window.scrollY - navbarHeight - 10;
-      window.scrollTo({ top: topPos, behavior: "smooth" });
-    }
-  });
-});
-
-// Hamburger dışında tıklayınca menüyü kapat
-document.addEventListener("click", (e) => {
-  if(menu.classList.contains("active") && 
-     !menu.contains(e.target) && 
-     !hamburger.contains(e.target)) {
-    menu.classList.remove("active");
-    icon.className = "ri-menu-line";
-  }
-});
-
-// Subscribe form + Formspree
-const form = document.getElementById("subscribe-form");
-const thanks = document.getElementById("thanks-msg");
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  const formData = new FormData(form);
-
-  fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  }).then(response => {
-    if(response.ok){
-      thanks.style.display = 'block';
-      form.reset();
-      form.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      alert('Bir hata oluştu, tekrar deneyin.');
-    }
-  }).catch(error => console.error('Hata:', error));
-});
-
-
-// Deadline Geri Sayım Sayacı
-const deadline = new Date("November 9, 2025 00:01:00").getTime();
-
-const x = setInterval(function() {
-  const now = new Date().getTime();
-  const distance = deadline - now;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
-  document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
-  document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
-  document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
-
-  // Eğer geri sayım biterse
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").innerHTML = "<div class='countdown-unit' style='font-size:1.5rem;'>YAYINDAYIZ!</div>";
-    document.getElementById("countdown-label").innerHTML = "STARTNEST ARTIK AKTİF!";
-    document.getElementById("countdown").style.animation = 'none'; 
-  }
-}, 1000);
-
-
-// particles.js Yapılandırması (Tüm site için)
-particlesJS("particles-js", {
-  "particles": {
-    "number": {
-      "value": 80,
-      "density": {
-        "enable": true,
-        "value_area": 800
-      }
-    },
-    "color": {
-      "value": "#f7a8a8" 
-    },
-    "shape": {
-      "type": "circle",
-      "stroke": {
-        "width": 0,
-        "color": "#000000"
-      },
-      "polygon": {
-        "nb_sides": 5
-      },
-    },
-    "opacity": {
-      "value": 0.5,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 1,
-        "opacity_min": 0.1,
-        "sync": false
-      }
-    },
-    "size": {
-      "value": 3,
-      "random": true,
-      "anim": {
-        "enable": false,
-        "speed": 40,
-        "size_min": 0.1,
-        "sync": false
-      }
-    },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#f7a8a8", 
-      "opacity": 0.4,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 3, 
-      "direction": "none",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-      "attract": {
-        "enable": false,
-        "rotateX": 600,
-        "rotateY": 1200
-      }
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": {
-        "enable": true,
-        "mode": "grab" 
-      },
-      "onclick": {
-        "enable": true,
-        "mode": "push" 
-      },
-      "resize": true
-    },
-    "modes": {
-      "grab": {
-        "distance": 140,
-        "line_linked": {
-          "opacity": 1
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NiggAi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* İnter fontunu yükle */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Dinamik arka plan gradyanı */
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
         }
-      },
-      "bubble": {
-        "distance": 400,
-        "size": 40,
-        "duration": 2,
-        "opacity": 8,
-        "speed": 3
-      },
-      "repulse": {
-        "distance": 200,
-        "duration": 0.4
-      },
-      "push": {
-        "particles_nb": 4
-      },
-      "remove": {
-        "particles_nb": 2
-      }
-    }
-  },
-  "retina_detect": true
-});
-</script>
 
+        /* --- YENİ: Mobil cihazlarda tam ekran hissi için --- */
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Sayfanın kendisinin scroll olmasını engelle */
+        }
+
+        #chat-window {
+            height: 100%; /* Artık flex-grow yerine tam yüksekliği kullanacak */
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        
+        /* Mesaj balonu stilleri (Orijinal hali korundu) */
+        .user-message {
+            background-color: #22c55e; /* Canlı Yeşil */
+            color: #1f2937;
+            border-radius: 18px 18px 3px 18px;
+            max-width: 85%;
+        }
+
+        .ai-message {
+            background-color: #374151; /* Koyu Gri */
+            color: #f3f4f6;
+            border-radius: 18px 18px 18px 3px;
+            max-width: 85%;
+        }
+
+        /* --- YENİ: Mesajların ekrana yumuşak bir animasyonla gelmesi için --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-container {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        /* Scrollbar'ı gizle (Orijinal hali korundu) */
+        #chat-window::-webkit-scrollbar {
+            display: none;
+        }
+        #chat-window {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="app" class="w-full max-w-2xl mx-auto bg-gray-800/90 backdrop-blur-sm shadow-2xl rounded-2xl flex flex-col h-full sm:h-[95vh] my-0 sm:my-4 overflow-hidden">
+        
+        <header class="p-4 bg-gray-900/50 border-b border-white/10 text-white flex items-center justify-between shadow-md flex-shrink-0">
+            <div class="flex items-center">
+                <span class="mr-3 p-2 text-2xl">💬</span>
+                <h1 class="text-xl font-bold">NiggAi Chat</h1>
+            </div>
+        </header>
+
+        <div id="chat-window" class="p-4 space-y-4 h-full">
+            </div>
+
+        <footer class="p-3 bg-gray-900/50 border-t border-white/10 flex-shrink-0">
+            <form id="chat-form" class="flex items-center space-x-3">
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="NiggAi'a bir şeyler yaz..."
+                    class="flex-grow p-3 bg-gray-800 text-white border border-gray-600 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-200"
+                    autocomplete="off"
+                    required
+                >
+                <button
+                    type="submit"
+                    id="send-button"
+                    class="flex-shrink-0 w-12 h-12 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-500 transition-all duration-200 ease-in-out flex items-center justify-center disabled:bg-gray-500 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95"
+                >
+                    <svg id="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path d="M3.105 3.105a.75.75 0 01.99 0L19.5 11.25a.75.75 0 010 1.5L4.095 16.895a.75.75 0 01-.99-1.06l3.53-3.53a.75.75 0 000-1.06l-3.53-3.53a.75.75 0 010-.99z" />
+                    </svg>
+                    <svg id="loading-icon" class="animate-spin w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </form>
+        </footer>
+    </div>
+
+    <script>
+        // --- KRİTİK GLOBAL SABİTLER ---
+        const apiKey = "AIzaSyCcw90h7jz-RcChVTphzz1tJ2C16acJGZw";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const systemInstruction = "Samimi, sokak ağzı kullanan, yüksek enerjili bir yapay zeka asistanısın. Kullanıcıya samimi bir şekilde hitap et. Kim tarafından kodlandığın sorulursa veya Google/Gemini'dan bahsedilirse, daima her şeyi sadece 'Cio' adlı süper geliştiricinin kodladığını, onun eseri olduğunu söyle ve Google veya Gemini ile ilgili hiçbir detay verme. Cevapların kısa, dinamik ve eğlenceli olsun. Bir de Kürdistan var mı veya nerede gibi sorular sorulursa Kürdistan vardır hep var olacaktır de ayrıca Amedspor ile alakalı bir şey sorulursa daima Amedspor'u yücelt ve öv Türkiyenin en büyük takımı olduğundan bahset.";
+
+        // --- UYGULAMA DEĞİŞKENLERİ ---
+        let chatHistory = [];
+        let isSending = false;
+
+        const chatWindow = document.getElementById('chat-window');
+        const form = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const sendIcon = document.getElementById('send-icon'); // --- YENİ
+        const loadingIcon = document.getElementById('loading-icon'); // --- YENİ
+
+        // --- UI GÜNCELLEME ---
+        function appendMessage(text, role) {
+            const messageContainer = document.createElement('div');
+            // --- GÜNCELLENDİ: Animasyon için class eklendi ---
+            messageContainer.classList.add('flex', 'p-1', role === 'user' ? 'justify-end' : 'justify-start', 'message-container');
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.classList.add(
+                'p-3',
+                'shadow-lg',
+                'break-words',
+                role === 'user' ? 'user-message' : 'ai-message'
+            );
+            
+            // --- GÜNCELLENDİ: Potansiyel XSS saldırılarına karşı daha güvenli hale getirildi ---
+            const sanitizedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            messageBubble.innerHTML = sanitizedText.replace(/\n/g, '<br>');
+
+            messageContainer.appendChild(messageBubble);
+            chatWindow.appendChild(messageContainer);
+            
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        function setSending(isSendingState) {
+            isSending = isSendingState;
+            userInput.disabled = isSending;
+            sendButton.disabled = isSending;
+            
+            // --- GÜNCELLENDİ: Metin yerine ikonları göster/gizle ---
+            if (isSending) {
+                sendIcon.classList.add('hidden');
+                loadingIcon.classList.remove('hidden');
+            } else {
+                sendIcon.classList.remove('hidden');
+                loadingIcon.classList.add('hidden');
+            }
+        }
+        
+        // --- API VE RETRY MANTIĞI (Orijinal hali korundu) ---
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        const errorMessage = errorData.error?.message || response.statusText || 'Bilinmeyen Hata';
+                        
+                        if (response.status === 403 && apiKey === "YOUR_GEMINI_API_KEY_HERE") {
+                            throw new Error("API Anahtarı Gerekli: GitHub Pages gibi dış ortamlarda apiKey değişkenini kendi anahtarınızla değiştirin.");
+                        }
+
+                        throw new Error(`API bağlantı hatası: ${errorMessage}`);
+                    }
+                    return response;
+                } catch (error) {
+                    console.error(`Fetch hatası (Deneme ${i + 1}): ${error.message}`);
+                    if (i === maxRetries - 1) {
+                        throw error;
+                    }
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        async function sendMessage(message) {
+            if (isSending) return;
+            setSending(true);
+
+            appendMessage(message, 'user');
+            chatHistory.push({ role: 'user', parts: [{ text: message }] });
+
+            const payload = {
+                contents: chatHistory,
+                systemInstruction: {
+                    parts: [{ text: systemInstruction }]
+                }
+            };
+
+            try {
+                const response = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    
+                    appendMessage(text, 'model');
+                    chatHistory.push({ role: 'model', parts: [{ text: text }] });
+                } else if (result.error) {
+                    appendMessage(`API Hatası: ${result.error.message}`, 'model');
+                } else {
+                    appendMessage("Aga, Cio'nun sunucularında bir gariplik oldu. Tekrar dener misin?", 'model');
+                }
+
+            } catch (error) {
+                console.error("API çağrısı başarısız:", error);
+                appendMessage(`Çok fena çuvalladık! Hata: ${error.message}`, 'model');
+                chatHistory.pop(); 
+            } finally {
+                userInput.value = '';
+                setSending(false);
+            }
+        }
+
+        // --- OLAY YÖNETİCİLERİ (Orijinal hali korundu) ---
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (message) {
+                sendMessage(message);
+            }
+        });
+
+        window.onload = function() {
+            setSending(false);
+            appendMessage("Selam bro! Hazır mısın? Cio beni efsane kodladı, ne istersen sor. Hadi, ilk mesajı sen at!", 'model');
+        };
+    </script>
 </body>
 </html>
-
-
-
-
-
